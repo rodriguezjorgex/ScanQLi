@@ -357,7 +357,6 @@ def CheckPageVuln(url, vuln, html = None):
             payload = CheckPageListVuln(pageset, vuln)
             if payload:
                 result.append(payload)
-                break
     bar.delbar()
     return result
 
