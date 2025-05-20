@@ -356,8 +356,16 @@ def CheckPageVuln(url, vuln, html = None):
         if fields:
             payload = CheckPageListVuln(pageset, vuln)
             if payload:
-                result.append(payload)
-    bar.delbar()
+                result.append(payload)    
+    bar.delbar() #This was causing break error.
+    return result
+
+def CheckPageListAllVulns(pageset):
+    result = []
+    for url, html in pageset.items():
+        vulnerabilities = CheckPageVuln(url, html=html)
+        if vulnerabilities:
+            result.extend(vulnerabilities)
     return result
 
 def CheckFilePerm(filename):
