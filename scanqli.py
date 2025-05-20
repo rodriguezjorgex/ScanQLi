@@ -13,6 +13,7 @@ import json
 from operator import is_not
 from functools import partial
 import logo
+import base64
 import numpy
 import os
 try:
@@ -118,6 +119,10 @@ if options.quick:
     config.scantype = "quick"
 
 # init config
+# decode logo list in base64
+for i in range(0, len(logo.logolist)):
+    logo.logolist[i] = base64.b64decode(logo.logolist[i]).decode('utf-8')
+
 config.init()
 
 # Start

@@ -10,6 +10,12 @@ SQLQuotes = [
     '"'
 ]
 
+SQLConcat = [
+    "'+'",
+    "' '",
+    "'+USER+'"
+]
+
 GBKQuotes = [
     "%bf'",
     '%bf"'
@@ -109,6 +115,7 @@ Quickvulncheck = [
 ]
 
 def init():
+    # Moved initialization logic outside of here and into the main script for more flexibility
     global vulncheck
     global scantype
 
