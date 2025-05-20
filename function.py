@@ -24,6 +24,7 @@ vulnpages = {None}
 waittime = 0
 verifyssl = True
 
+proxy = None
 def GetHref(html):
     soup = BeautifulSoup(html, "lxml")
     hreflist = []
@@ -79,6 +80,7 @@ def GetHTML(url):
     global vulnscanstrated
     global waittime
     global verifyssl
+    global proxy
     
     try:
         if not CheckBlackListURLs(url):
@@ -87,7 +89,10 @@ def GetHTML(url):
             time.sleep(waittime)
             starttime = time.time()
             r = requests.get(url, cookies=cookies, verify=verifyssl)
+            if proxy:
+                r = requests.get(url, cookies=cookies, verify=verifyssl, proxies={'http': proxy, 'https': proxy})
             endtime = time.time()
+
             if reponsetime and (reponsetime * 3 > endtime - starttime):
                 reponsetime = (reponsetime + (endtime - starttime)) / 2    
             elif reponsetime == None:
@@ -108,6 +113,7 @@ def PostData(url, data):
     global vulnscanstrated
     global waittime
     global verifyssl
+    global proxy
     
     try:
         if url not in config.BannedURLs:
@@ -116,7 +122,10 @@ def PostData(url, data):
             time.sleep(waittime)
             starttime = time.time()
             r = requests.post(url, data=data, cookies=cookies, verify=verifyssl)
+            if proxy:
+                r = requests.post(url, data=data, cookies=cookies, verify=verifyssl, proxies={'http': proxy, 'https': proxy})
             endtime = time.time()
+
 
             if reponsetime and ((reponsetime * 2) > (endtime - starttime)):
                 reponsetime = (reponsetime + (endtime - starttime)) / 2

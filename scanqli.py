@@ -30,6 +30,7 @@ groupscan = optparse.OptionGroup(parser, "Scanning")
 groupoutput = optparse.OptionGroup(parser, "Output")
 
 groupscan.add_option('-u', "--url", action="store", dest="url", help="URL to scan", default=None)
+groupscan.add_option('-p', "--proxy", action="store", metavar="proxy", dest="proxy", help="Specify a proxy (e.g., http://127.0.0.1:8080)", default=None)
 groupscan.add_option('-U', "--urllist", action="store", metavar="file", dest="urllist", help="URL list to scan (one line by url)", default=None)
 groupscan.add_option('-i', "--ignore", action="append", metavar="url", dest="iurl", help="Ignore given URLs during scan", default=None)
 groupscan.add_option('-I', "--ignorelist", action="store", metavar="file", dest="iurllist", help="Ignore given URLs list (one line by url)", default=None)
@@ -103,6 +104,10 @@ if options.cookies:
 # NoSSLCheck
 if options.nosslcheck:
     function.verifyssl = False
+
+# Proxy
+if options.proxy:
+    function.proxy = options.proxy
 
 # Wait time
 if options.waittime:
