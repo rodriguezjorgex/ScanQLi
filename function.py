@@ -235,6 +235,20 @@ def CheckGetBlind(url, blindlist, html):
 def CheckGetVuln(url, vuln, html):
     global currenttested
     global reponsetime
+
+    if currenttested == "blind":
+        return CheckGetBlind(url, vuln, html)
+
+    if currenttested == "concat":
+        return CheckConcatVuln(url, vuln, html)
+    
+    validproof = CheckValidProof(html)
+    payloadedurl = url + vuln
+
+    while True:
+        starttime = time.time()
+    global currenttested
+    global reponsetime
     
     if currenttested == "blind":
         return CheckGetBlind(url, vuln, html)

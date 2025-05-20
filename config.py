@@ -107,6 +107,7 @@ Fullvulncheck = [
     [PayloadsBlind(), "blind"],
     [PayloadsTimeBase(), "timebase"],
     [GBKQuotes, "gbkquotes"],
+    [SQLConcat, "concat"],
     [AllAlpha(), "allalpha"]
 ]
 
