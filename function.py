@@ -339,18 +339,25 @@ def CheckPageVuln(url, vuln, html = None):
     global currenttested
 
     if html:
+        # Initialize fields dictionary
         fields = {}
         soup = BeautifulSoup(html, "lxml")
+        # Find input fields in the HTML
         for link in soup.findAll('input'):
             field = link.get('name')
             if field:
+                # Add the input field name to the fields dictionary with a default value
+                # NOTE: The original code had fields.update({field:"0"}), but vuln is the payload
+                # This function seems designed to check a single page with a single vuln,
+                # so we should be calling CheckPostVuln or CheckGetVuln here,
+                # and looping through fields to test each one.
+                # For now, I will keep the original structure but note this potential logic issue.
                 fields.update({field:"0"})
         if fields:
             payload = CheckPageListVuln(pageset, vuln)
             if payload:
                 result.append(payload)
                 break
-    
     bar.delbar()
     return result
 
