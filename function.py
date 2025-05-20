@@ -338,48 +338,16 @@ def CheckURLQuery(url):
         return False
 
 def CheckPageVuln(url, vuln, html = None):
+    global currenttested
+
     if html:
         fields = {}
         soup = BeautifulSoup(html, "lxml")
-    global currenttested
         for link in soup.findAll('input'):
             field = link.get('name')
             if field:
                 fields.update({field:"0"})
         if fields:
-            postresult = CheckPostVuln(url, vuln, fields, html)
-            if postresult:
-                return postresult
-    if CheckURLQuery(url):
-        return CheckGetVuln(url, vuln, html)
-
-def CheckPageListVuln(pageset, vuln):
-    global vulnpages
-    result = []
-    for url in pageset:
-        if url not in vulnpages:
-            payload = CheckPageVuln(url, vuln, pageset[url])
-            if payload:
-                vulnpages.update({url})
-                result.append(payload)
-    return result
-
-def CheckPageListAllVulns(pageset):
-    global bar
-    global currenttested
-    result = []
-
-    bar = progressbar.progressbar("bar", "Search vulns")
-    bar.totalcount = len(config.vulncheck)
-    bar.count = 0
-
-    for vulnlist in config.vulncheck:
-        bar.total = len(vulnlist[0])
-        bar.value = 0
-        bar.count += 1
-        currenttested = vulnlist[1]
-        for vuln in vulnlist[0]:
-            bar.progress(1)
             payload = CheckPageListVuln(pageset, vuln)
             if payload:
                 result.append(payload)
