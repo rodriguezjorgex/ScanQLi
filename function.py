@@ -363,9 +363,11 @@ def CheckPageVuln(url, vuln, html = None):
 def CheckPageListAllVulns(pageset):
     result = []
     for url, html in pageset.items():
-        vulnerabilities = CheckPageVuln(url, html=html)
-        if vulnerabilities:
-            result.extend(vulnerabilities)
+        for vuln_list, vuln_type in config.vulncheck: # Iterate through vulncheck list
+            for vuln in vuln_list:
+                 vulnerabilities = CheckPageVuln(url, vuln, html=html)
+                 if vulnerabilities:
+                     result.extend(vulnerabilities)
     return result
 
 def CheckFilePerm(filename):
