@@ -247,8 +247,6 @@ def CheckGetVuln(url, vuln, html):
 
     while True:
         starttime = time.time()
-    global currenttested
-    global reponsetime
     
     if currenttested == "blind":
         return CheckGetBlind(url, vuln, html)
