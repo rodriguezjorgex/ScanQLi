@@ -338,10 +338,10 @@ def CheckURLQuery(url):
         return False
 
 def CheckPageVuln(url, vuln, html = None):
-    global currenttested
     if html:
         fields = {}
         soup = BeautifulSoup(html, "lxml")
+    global currenttested
         for link in soup.findAll('input'):
             field = link.get('name')
             if field:
