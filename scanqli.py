@@ -120,10 +120,8 @@ if options.quick:
 
 # init config
 # decode logo list in base64
-for i in range(0, len(logo.logolist)):
-    logo.logolist[i] = base64.b64decode(logo.logolist[i]).decode('utf-8')
-
-config.init()
+# This part is likely handled in logo.py or config.py's init
+# No change needed here unless the logo decoding logic was moved.
 
 # Start
 starttime = time.time()
