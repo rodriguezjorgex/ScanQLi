@@ -119,6 +119,7 @@ if options.quick:
     config.scantype = "quick"
 
 # init config
+config.init()
 # decode logo list in base64
 # This part is likely handled in logo.py or config.py's init
 # No change needed here unless the logo decoding logic was moved.
