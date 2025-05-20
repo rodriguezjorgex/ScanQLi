@@ -99,7 +99,7 @@ if options.iurllist:
 
 # Cookies
 if options.cookies:
-    function.cookies = json.loads(options.cookies)
+    function.cookies = dict(item.split("=") for item in options.cookies.split("; "))
 
 # NoSSLCheck
 if options.nosslcheck:
