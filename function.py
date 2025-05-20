@@ -338,6 +338,7 @@ def CheckURLQuery(url):
         return False
 
 def CheckPageVuln(url, vuln, html = None):
+    global currenttested
     if html:
         fields = {}
         soup = BeautifulSoup(html, "lxml")
